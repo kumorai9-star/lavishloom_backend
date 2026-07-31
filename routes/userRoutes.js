@@ -1,3 +1,4 @@
+import { loginUser, registerUser } from '../controllers/userController.js';
 import express from 'express';
 import { 
   authUser, 
