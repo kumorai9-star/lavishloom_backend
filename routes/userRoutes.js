@@ -1,4 +1,3 @@
-import { loginUser, registerUser } from '../controllers/userController.js';
 import express from 'express';
 import { 
   authUser, 
@@ -6,7 +5,7 @@ import {
   updateProfile, 
   toggleWishlist, 
   getWishlist 
-} from '../controllers/userController.js';
+} from '../controllers/usercontroller.js';
 import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
