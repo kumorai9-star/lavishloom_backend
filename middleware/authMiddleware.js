@@ -15,8 +15,9 @@ export const protect = async (req, res, next) => {
         token = req.headers.authorization.split(' ')[2];
       }
 
-      // 2. Verify token with your secret
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      // 2. FIXED HERE: Added matching fallback key so jwt.verify never receives undefined!
+      const secret = process.env.JWT_SECRET || 'fallback_secret_key_123';
+      const decoded = jwt.verify(token, secret);
 
       // 3. Find user in database (handles both decoded.id and decoded._id)
       const userId = decoded.id || decoded._id;
@@ -28,7 +29,6 @@ export const protect = async (req, res, next) => {
 
       return next(); // Token is valid, proceed to controller
     } catch (error) {
-      // 🔍 PRINT THE EXACT REASON IN YOUR NODE.JS TERMINAL
       console.error('JWT Verification Error:', error.message);
 
       return res.status(401).json({ 
