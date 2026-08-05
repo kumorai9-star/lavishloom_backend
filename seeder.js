@@ -1,3 +1,4 @@
+export default sampleProducts;
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import Product from './models/Product.js';
