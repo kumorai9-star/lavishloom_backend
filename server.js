@@ -8,7 +8,6 @@ import orderRoutes from './routes/orderRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import subscriberRoutes from './routes/subscriberRoutes.js';
 
-// Imports for cloud seeding
 import Product from './models/Product.js';
 import sampleProducts from './seeder.js';
 
@@ -27,7 +26,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/subscribers', subscriberRoutes);
 
-// Temporary trigger endpoint for cloud database seeding
+// Cloud seed trigger route
 app.get('/api/seed-cloud', async (req, res) => {
   try {
     await Product.deleteMany();
