@@ -19,6 +19,7 @@ const orderSchema = new mongoose.Schema({
     postalCode: String
   },
   paymentMethod: { type: String, default: 'Card' },
+  paymentProof: { type: String, default: '' },
   subtotal: { type: Number, required: true },
   shippingPrice: { type: Number, default: 0 },
   taxPrice: { type: Number, default: 0 },

@@ -3,10 +3,7 @@ import dotenv from 'dotenv';
 import Product from './models/Product.js';
 import connectDB from './config/db.js';
 
-dotenv.config();
-await connectDB();
-
-const sampleProducts = [
+export const sampleProducts = [
   {
     name: "Heirloom Denim Utility Jacket",
     price: 185,
@@ -246,11 +243,14 @@ const sampleProducts = [
   }
 ];
 
-const seedDB = async () => {
+// Standalone CLI seeding function (only runs if executed via `node seeder.js`)
+const runStandaloneSeeder = async () => {
+  dotenv.config();
+  await connectDB();
   try {
     await Product.deleteMany();
     await Product.insertMany(sampleProducts);
-    console.log("Database successfully seeded with Atelier products!");
+    console.log("Database successfully seeded via CLI script!");
     process.exit(0);
   } catch (error) {
     console.error("Seeding error:", error);
@@ -258,6 +258,9 @@ const seedDB = async () => {
   }
 };
 
-seedDB();
+// Check if file is called directly via `node seeder.js`
+if (process.argv[1].includes('seeder.js')) {
+  runStandaloneSeeder();
+}
 
 export default sampleProducts;
